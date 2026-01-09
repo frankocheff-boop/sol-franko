@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      # Note: Remove 'copilot/site-setup' after merging to main
       - copilot/site-setup
   workflow_dispatch:
 
