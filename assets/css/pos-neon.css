@@ -1,0 +1,99 @@
+/* VERANO ESTATE POS - Estilos Gourmet */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;600;700&display=swap');
+
+:root {
+    --rojo-carmin: #DC143C;
+    --rojo-carmin-oscuro: #B01030;
+    --rojo-carmin-claro: #FF1744;
+    --rojo-carmin-suave: #FFE5EC;
+    --blanco-puro: #FFFFFF;
+    --crema: #FFF8F0;
+    --gris-muy-claro: #F5F5F5;
+    --beige-suave: #FAF7F2;
+    --negro-puro: #000000;
+    --gris-antracita: #2C2C2C;
+    --gris-oscuro: #4A4A4A;
+    --gris-medio: #6B6B6B;
+    --boton-negro: #1A1A1A;
+    --dorado: #D4AF37;
+    --dorado-claro: #F4E4C1;
+    --sombra-suave: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --sombra-media: 0 4px 12px rgba(0, 0, 0, 0.12);
+    --sombra-fuerte: 0 8px 24px rgba(0, 0, 0, 0.15);
+    --sombra-roja: 0 4px 12px rgba(220, 20, 60, 0.2);
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: var(--crema);
+    color: var(--gris-antracita);
+}
+
+h1, h2, h3, .titular {
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 1px;
+}
+
+/* Scrollbar Elegant */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--gris-muy-claro);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--rojo-carmin);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--rojo-carmin-oscuro);
+}
+
+.elegant-border {
+    border: 1px solid var(--gris-muy-claro);
+    transition: all 0.3s ease;
+}
+
+.product-card:hover {
+    border-color: var(--rojo-carmin);
+    box-shadow: var(--sombra-roja);
+    transform: translateY(-2px);
+}
+
+.active-cat {
+    background-color: var(--rojo-carmin) !important;
+    border-color: var(--rojo-carmin) !important;
+    color: var(--blanco-puro) !important;
+    box-shadow: var(--sombra-roja);
+}
+
+.shadow-elegant {
+    box-shadow: var(--sombra-media);
+}
+
+.shadow-elegant-hover {
+    box-shadow: var(--sombra-fuerte);
+}
+
+@keyframes pulse-once {
+    0% {
+        opacity: 0.6;
+        transform: scale(0.95);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.02);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.animate-pulse-once {
+    animation: pulse-once 0.3s ease-out;
+}
