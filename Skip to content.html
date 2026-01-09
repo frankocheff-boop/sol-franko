@@ -1,0 +1,174 @@
+ Skip to content
+
+
+
+StudioCode
+StudioCode
+Plan
+Build
+Files
+Commands
+Search
+Your app is not running
+
+Run
+to preview your app.
+studio code
+
+I see you've mentioned "studio code" but I need more details to understand what you'd like to build.
+
+Could you please clarify what kind of project you have in mind? For example:
+
+Are you looking to build a code editor or IDE similar to Visual Studio Code?
+Do you want to create a web-based coding environment or playground?
+Are you thinking of a code collaboration platform or studio?
+Or perhaps something else entirely related to coding tools?
+The more specific you can be about your vision, features you'd like, and who would use it, the better I can help you create a comprehensive development plan.
+
+I can see you've shared an HTML file for a luxury travel website called "El Arte de Vivir by Franko" - a beautiful Spanish-language site for high-end hospitality services in Puerto Vallarta.
+
+However, I'm not clear on how this relates to your earlier mention of "studio code" and what you'd like me to help you build. Could you clarify what project you have in mind?
+
+Are you looking to:
+
+Build a code editor/IDE that could work with HTML files like this one?
+Convert this static HTML into a dynamic web application with a backend?
+Create a content management system for managing this type of luxury travel website?
+Build a code collaboration platform for working on web projects?
+Something else entirely?
+Please let me know what kind of application or tool you'd like to create, and I'll help you develop a comprehensive plan for it.
+
+
+Scroll to latest
+
+Message Agent…
+StudioCode - Replit
+Attached file
+index-html_1755330843357.html
+<!doctype html>
+<html lang="es-MX" style="scroll-behavior: smooth;">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>El Arte de Vivir by Franko — Luxury Life</title>
+  <meta name="description"
+    content="Experiencias 5 estrellas en Puerto Vallarta: chef privado, villas de lujo, transporte, tours de tequila y raicilla, y reservas VIP. Curado por Franko." />
+  <meta name="keywords"
+    content="Puerto Vallarta, villas de lujo, chef privado, transporte, tour tequila, tour raicilla, reservas restaurantes, concierge" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="El Arte de Vivir by Franko — Luxury Life" />
+  <meta property="og:description"
+    content="Viajes ceremoniales y hospitalidad de lujo en Puerto Vallarta: villas, chef privado, transporte y tours selectos." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1572252443029-7c2a71552e27?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" />
+  <meta property="og:url" content="https://tudominio.com" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <meta name="theme-color" content="#0b0b0d" />
+
+  <style>
+    :root {
+      --bg: #0b0b0d;
+      --bg-soft: #121218;
+      --text: #f5f5f7;
+      --muted: #c6c6cc;
+      --gold: #d4af37;
+      --gold-2: #f1d27a;
+      --accent: #2b4a6f;
+      --shadow: 0 10px 30px rgba(0, 0, 0, .25);
+      --radius: 14px;
+      --max: 1200px;
+      --step--1: clamp(.9rem, .85rem + .2vw, 1rem);
+      --step-0: clamp(1rem, .95rem + .4vw, 1.125rem);
+      --step-1: clamp(1.125rem, 1rem + .8vw, 1.25rem);
+      --step-2: clamp(1.4rem, 1.1rem + 1.4vw, 1.75rem);
+      --step-3: clamp(2rem, 1.6rem + 2.4vw, 3rem);
+      --step-4: clamp(2.8rem, 2rem + 3.5vw, 4rem);
+    }
+
+    * { box-sizing: border-box; }
+
+    html,
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      line-height: 1.5;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container { max-width: var(--max); margin-inline: auto; padding: clamp(16px, 2vw, 24px); }
+
+    .btn {
+      display: inline-block;
+      padding: .9rem 1.5rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .15);
+      background: linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .02));
+      color: var(--text);
+      backdrop-filter: blur(6px);
+      box-shadow: var(--shadow);
+      transition: .25s transform, .25s border-color;
+      text-align: center;
+    }
+    .btn:hover { transform: translateY(-3px); border-color: var(--gold); }
+    .btn--gold {
+      background: linear-gradient(180deg, var(--gold), var(--gold-2));
+      color: #1c1c1c;
+      border: 0;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: .35rem .7rem;
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 999px;
+      font-size: var(--step--1);
+      color: var(--muted);
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: linear-gradient(180deg, rgba(11, 11, 13, .9), rgba(11, 11, 13, .4) 60%, transparent);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .brand { display: flex; align-items: center; gap: .7rem; }
+    .brand__mark {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, var(--gold-2), var(--gold));
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, .06);
+    }
+    .brand__name { font-size: var(--step-1); letter-spacing: .4px; }
+    
+    .menu { display: none; }
+    @media (min-width: 900px) {
+        .menu { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    }
+    .menu a { padding: .5rem .8rem; border-radius: 999px; color: var(--muted); }
+    .menu a:not(.btn):focus, .menu a:not(.btn):hover { outline: none; background: rgba(255, 255, 255, .06); color: var(--text); }
+    
+    .mobile-menu-btn { display: block; background: none; border: 0; color: var(--text); padding: 8px; cursor: pointer; }
+    @media (min-width: 900px) { .mobile-menu-btn { display: none; } }
+    
+    .mobile-nav {
+        display: none;
+        position: fixed;
+        top: 0; right: 0; bottom: 0; left: 0;
+        background: rgba(11, 11, 13, .95);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5rem;
+    }
+    .mobile-nav.is-open { display: flex; }
+    .mobile-nav a { font-size: var(--step-2); color: var(--muted); }
+    .mobile-nav a:hover { color: var(--text); }
+    .mobile-nav .btn { margin-top: 1rem; }
+    .close-btn { position: absolute; ...

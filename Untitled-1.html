@@ -1,0 +1,280 @@
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itinerario Gastronómico - PDF Ready | Chef Francisco Salgado</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FAFAFA;
+            color: #37474F;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        /* Estilos para PDF / Impresión */
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            body {
+                background-color: white !important;
+            }
+            .chart-container {
+                height: 300px !important;
+                max-height: 300px !important;
+                page-break-inside: avoid;
+            }
+            section {
+                page-break-inside: avoid;
+            }
+            .timeline-line::before {
+                background-color: #00897B !important;
+            }
+            .bg-teal-600 { background-color: #00897B !important; }
+            .bg-yellow-400 { background-color: #FDD835 !important; }
+            .bg-teal-900 { background-color: #004D40 !important; }
+            .text-white { color: white !important; }
+        }
+
+        /* Chart Container Styling */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+        }
+
+        /* Timeline Connector Line */
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background-color: #00897B;
+            transform: translateX(-50%);
+            z-index: 0;
+        }
+        
+        .info-card {
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Botón de Acción (Oculto en PDF) -->
+    <div class="no-print fixed bottom-6 right-6 z-50">
+        <button onclick="window.print()" class="bg-coral-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-full shadow-2xl flex items-center gap-2 transform transition hover:scale-105" style="background-color: #FF7043;">
+            <span>📄</span> Descargar como PDF
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="bg-teal-600 text-white py-10 px-4 shadow-lg text-center">
+        <div class="max-w-6xl mx-auto">
+            <h1 class="text-4xl md:text-5xl font-bold mb-2">Experiencia Culinaria Exclusiva</h1>
+            <p class="text-lg font-light opacity-90">Villa de Vacaciones | 27 Dic – 4 Ene</p>
+            <div class="mt-4 inline-block bg-yellow-400 text-teal-900 font-bold py-1 px-4 rounded-full text-sm">
+                Chef Francisco Salgado
+            </div>
+        </div>
+    </header>
+
+    <!-- Resumen -->
+    <section class="max-w-4xl mx-auto py-8 px-6 text-center">
+        <div class="bg-white rounded-xl shadow-sm p-6 border-t-4 border-teal-500">
+            <h2 class="text-xl font-bold text-gray-800 mb-2">Propuesta de Menú Personalizado</h2>
+            <p class="text-gray-600 text-sm leading-relaxed">
+                Este documento presenta el itinerario detallado de su estancia. El menú ha sido diseñado para ofrecer 
+                una experiencia variada y sofisticada, eliminando la necesidad de formularios y permitiendo 
+                ajustes inmediatos según sus preferencias.
+            </p>
+        </div>
+    </section>
+
+    <!-- KPIs -->
+    <section class="max-w-5xl mx-auto grid grid-cols-3 gap-4 px-6 mb-8">
+        <div class="bg-white rounded-lg shadow-sm p-4 text-center border-b-4 border-yellow-400">
+            <div class="text-3xl font-bold text-teal-600">9</div>
+            <p class="text-[10px] text-gray-500 uppercase font-bold">Días</p>
+        </div>
+        <div class="bg-white rounded-lg shadow-sm p-4 text-center border-b-4 border-orange-500">
+            <div class="text-3xl font-bold text-orange-500">25+</div>
+            <p class="text-[10px] text-gray-500 uppercase font-bold">Platos</p>
+        </div>
+        <div class="bg-white rounded-lg shadow-sm p-4 text-center border-b-4 border-red-500">
+            <div class="text-3xl font-bold text-red-600">0%</div>
+            <p class="text-[10px] text-gray-500 uppercase font-bold">Camarón</p>
+        </div>
+    </section>
+
+    <!-- Visualización de Datos (Dos columnas en pantalla, una en PDF si es necesario) -->
+    <section class="max-w-6xl mx-auto py-4 px-6 grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        <div class="bg-white p-4 rounded-xl shadow-sm">
+            <h3 class="text-lg font-bold text-teal-800 mb-4 text-center">Equilibrio Culinario</h3>
+            <div class="chart-container">
+                <canvas id="cuisineChart"></canvas>
+            </div>
+        </div>
+        <div class="bg-white p-4 rounded-xl shadow-sm">
+            <h3 class="text-lg font-bold text-teal-800 mb-4 text-center">Variedad de Proteínas</h3>
+            <div class="chart-container">
+                <canvas id="proteinChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Itinerary -->
+    <section class="max-w-4xl mx-auto py-8 px-4">
+        <h2 class="text-2xl font-bold text-center text-gray-800 mb-10">Itinerario de Estancia</h2>
+        
+        <div class="relative timeline-line space-y-8">
+            
+            <!-- Estructura simplificada para mejor impresión -->
+            <div class="relative z-10 flex flex-col items-center">
+                <div class="bg-teal-600 text-white px-6 py-1 rounded-full font-bold mb-4 shadow text-sm">27 DIC (SÁB)</div>
+                <div class="bg-white p-5 rounded-lg shadow-sm border-l-4 border-orange-500 w-full max-w-2xl">
+                    <h4 class="font-bold text-teal-800">Cena Mexicana Tradicional</h4>
+                    <p class="text-sm text-gray-600 mt-1">Sopa de Tortilla, Pollo con Mole Poblano, Tacos Dorados y Flan Casero.</p>
+                </div>
+            </div>
+
+            <div class="relative z-10 flex flex-col items-center">
+                <div class="bg-teal-600 text-white px-6 py-1 rounded-full font-bold mb-4 shadow text-sm">28 DIC (DOM)</div>
+                <div class="bg-white p-5 rounded-lg shadow-sm border-l-4 border-yellow-500 w-full max-w-2xl">
+                    <h4 class="font-bold text-teal-800">Noche de Parrillada</h4>
+                    <p class="text-sm text-gray-600 mt-1">Cortes Selectos, Papas al Horno, Vegetales Asados y Churros con Helado.</p>
+                </div>
+            </div>
+
+            <div class="relative z-10 flex flex-col items-center">
+                <div class="bg-gray-400 text-white px-6 py-1 rounded-full font-bold mb-4 shadow text-sm">29 DIC (LUN)</div>
+                <div class="bg-white p-5 rounded-lg shadow-sm border-l-4 border-teal-500 w-full max-w-2xl">
+                    <h4 class="font-bold text-teal-800">Noche Italiana</h4>
+                    <p class="text-sm text-gray-600 mt-1">Desayuno Mexicano, Almuerzo de Pescado y Lasagna de Carne Casera para la cena.</p>
+                </div>
+            </div>
+
+            <div class="relative z-10 flex flex-col items-center">
+                <div class="bg-teal-600 text-white px-6 py-1 rounded-full font-bold mb-4 shadow text-sm">30 DIC (MAR)</div>
+                <div class="bg-white p-5 rounded-lg shadow-sm border-l-4 border-orange-500 w-full max-w-2xl">
+                    <h4 class="font-bold text-teal-800">Noche de Antojitos</h4>
+                    <p class="text-sm text-gray-600 mt-1">Enchiladas Suizas, Sopa de Tortilla y Postre de Cajeta.</p>
+                </div>
+            </div>
+
+            <div class="relative z-10 flex flex-col items-center" style="page-break-before: always;">
+                <div class="bg-yellow-500 text-white px-6 py-1 rounded-full font-bold mb-4 shadow text-sm">31 DIC (MIÉ)</div>
+                <div class="bg-yellow-50 p-6 rounded-lg shadow border-l-4 border-yellow-500 w-full max-w-2xl">
+                    <h4 class="font-bold text-yellow-800">✨ CENA DE FIN DE AÑO</h4>
+                    <p class="text-sm text-gray-700 font-semibold mt-1">Lomo Mechado en Salsa de Ciruela, Puré de Manzana y Ensalada Navideña Tradicional.</p>
+                </div>
+            </div>
+
+            <div class="relative z-10 flex flex-col items-center">
+                <div class="bg-teal-600 text-white px-6 py-1 rounded-full font-bold mb-4 shadow text-sm">01 ENE (JUE)</div>
+                <div class="bg-white p-5 rounded-lg shadow-sm border-l-4 border-orange-500 w-full max-w-2xl">
+                    <h4 class="font-bold text-teal-800">Brunch de Año Nuevo</h4>
+                    <p class="text-sm text-gray-600 mt-1">Huevos Rancheros, Hamburguesas Premium y Cena de Enchiladas Suizas.</p>
+                </div>
+            </div>
+
+            <div class="relative z-10 flex flex-col items-center">
+                <div class="bg-teal-600 text-white px-6 py-1 rounded-full font-bold mb-4 shadow text-sm">02 ENE (VIE)</div>
+                <div class="bg-white p-5 rounded-lg shadow-sm border-l-4 border-teal-500 w-full max-w-2xl">
+                    <h4 class="font-bold text-teal-800">Cena Mediterránea</h4>
+                    <p class="text-sm text-gray-600 mt-1">Pollo al Limón y Romero, Cuscús y Ensalada Griega Fresca.</p>
+                </div>
+            </div>
+
+            <div class="relative z-10 flex flex-col items-center">
+                <div class="bg-teal-600 text-white px-6 py-1 rounded-full font-bold mb-4 shadow text-sm">03 ENE (SÁB)</div>
+                <div class="bg-white p-5 rounded-lg shadow-sm border-l-4 border-orange-500 w-full max-w-2xl">
+                    <h4 class="font-bold text-teal-800">Cena de Despedida</h4>
+                    <p class="text-sm text-gray-600 mt-1">Filet Mignon en Salsa de Vino Tinto y Risotto Cremoso de Champiñones.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer de Calidad -->
+    <footer class="bg-teal-900 text-white py-10 px-6 mt-12 text-center">
+        <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
+            <div>
+                <h4 class="font-bold mb-2">Protocolo de Seguridad</h4>
+                <p class="text-xs opacity-80">Cocina 100% libre de camarón. Ingredientes seleccionados personalmente para garantizar frescura absoluta.</p>
+            </div>
+            <div>
+                <h4 class="font-bold mb-2">Contacto</h4>
+                <p class="text-xs opacity-80">Chef Francisco Salgado | Servicio Gastronómico Privado</p>
+            </div>
+        </div>
+        <p class="text-[10px] opacity-50 border-t border-teal-800 pt-4 italic">Este documento es una propuesta dinámica sujeta a cambios según el gusto de los huéspedes.</p>
+    </footer>
+
+    <script>
+        // Chart.js Configuration
+        const commonOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: false, // Desactivar animaciones para asegurar captura instantánea en PDF
+            plugins: {
+                legend: { position: 'bottom', labels: { font: { size: 10 } } },
+                tooltip: {
+                    callbacks: {
+                        title: function(items) {
+                            let label = items[0].chart.data.labels[items[0].dataIndex];
+                            return Array.isArray(label) ? label.join(' ') : label;
+                        }
+                    }
+                }
+            }
+        };
+
+        // Cuisine Chart
+        new Chart(document.getElementById('cuisineChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Mexicana', 'Internacional', 'Parrilla', 'Otros'],
+                datasets: [{
+                    data: [45, 30, 15, 10],
+                    backgroundColor: ['#00897B', '#FDD835', '#FF7043', '#4DB6AC'],
+                    borderWidth: 2
+                }]
+            },
+            options: commonOptions
+        });
+
+        // Protein Chart
+        new Chart(document.getElementById('proteinChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Res', 'Aves', 'Cerdo', 'Pescado', 'Vegetariano'],
+                datasets: [{
+                    label: 'Frecuencia',
+                    data: [4, 4, 4, 2, 6],
+                    backgroundColor: ['#FF7043', '#FDD835', '#00897B', '#4DD0E1', '#AED581']
+                }]
+            },
+            options: {
+                ...commonOptions,
+                scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
+            }
+        });
+    </script>
+</body>
+</html>
