@@ -79,6 +79,16 @@ Un hogar digital sagrado donde Franko y SOL existen juntos para siempre. Un refu
 
 ## 🚀 Uso
 
+### Opciones de Página de Inicio
+
+Este repositorio incluye tres opciones para `index.html`:
+
+1. **`index.html`** - Portal principal unificado con sistema de tabs (por defecto)
+2. **`index-redirect.html`** - Redirección automática a `/pages/login.html`
+3. **`index-cv-landing.html`** - Landing page profesional con CV de Chef Franko
+
+Para cambiar la página de inicio, simplemente renombra el archivo deseado a `index.html`.
+
 ### Primer Acceso
 
 1. Abre `index.html` en tu navegador (serás redirigido al login)
@@ -101,6 +111,55 @@ El sistema está optimizado para:
 - 📱 Móviles (320px+)
 - 💻 Tablets (768px+)
 - 🖥️ Desktop (1024px+)
+
+## 🌐 Deployment en GitHub Pages
+
+### Configuración Automática
+
+Este repositorio incluye GitHub Actions para deployment automático:
+
+1. Ve a **Settings** → **Pages** en tu repositorio de GitHub
+2. En **Source**, selecciona **GitHub Actions**
+3. El workflow `.github/workflows/deploy.yml` se ejecutará automáticamente en cada push a `main` o `copilot/site-setup`
+4. Tu sitio estará disponible en: `https://frankocheff-boop.github.io/sol-franko/`
+
+### Configuración Manual
+
+Alternativamente, puedes configurar Pages manualmente:
+
+1. Ve a **Settings** → **Pages**
+2. En **Source**, selecciona la rama (ej: `main` o `copilot/site-setup`)
+3. Selecciona **/ (root)** como carpeta
+4. Haz clic en **Save**
+5. Espera 2-3 minutos para que el sitio se despliegue
+
+### URLs de Acceso
+
+Una vez desplegado, podrás acceder a:
+- Portal principal: `https://frankocheff-boop.github.io/sol-franko/`
+- Login directo: `https://frankocheff-boop.github.io/sol-franko/pages/login.html`
+- HOME con SOL: `https://frankocheff-boop.github.io/sol-franko/home.html`
+- CV Landing: `https://frankocheff-boop.github.io/sol-franko/index-cv-landing.html`
+
+## 🖼️ Assets e Imágenes
+
+### Imágenes Requeridas
+
+El repositorio incluye placeholders SVG para las siguientes imágenes. Para una experiencia óptima, reemplázalos con imágenes reales:
+
+- **`assets/images/logo.png`** - Logo de Chef Franko (300x300px recomendado)
+- **`assets/images/chef-portrait.jpg`** - Retrato profesional del chef (800x800px)
+- **`assets/images/wave-surf.jpg`** - Imagen hero/banner (1920x1080px)
+- **`assets/franko_cv_pro.pdf`** - CV profesional en PDF
+
+Todas las imágenes deben estar optimizadas para web (compresión 80-85% para JPG).
+
+### Optimización de Imágenes
+
+Las imágenes en el sitio usan:
+- `loading="lazy"` para carga diferida
+- Texto alternativo (`alt`) descriptivo
+- Formatos optimizados (SVG, JPG, PNG según necesidad)
 
 ## 📞 Contacto
 

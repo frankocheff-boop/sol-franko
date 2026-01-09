@@ -1,0 +1,22 @@
+PLACEHOLDER: Franko CV Professional
+
+This is a placeholder file for Chef Franko's professional CV.
+
+Please replace this file with the actual PDF: franko_cv_pro.pdf
+
+The CV should include:
+- Professional experience
+- Culinary specialties
+- Education and certifications
+- Contact information
+- Portfolio/Gallery of signature dishes
+
+Once the actual PDF is available, replace this file with:
+assets/franko_cv_pro.pdf
+
+For now, this placeholder ensures the file structure is complete.
+
+---
+© 2025 VERANO ESTATE - Chef Franko
+Phone: +52 322 160 6843
+Email: franko@veranostate.com

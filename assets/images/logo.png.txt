@@ -1,0 +1,5 @@
+# PLACEHOLDER: logo.png
+# This is a placeholder file for the Chef Franko logo
+# Replace this with the actual optimized logo.png from Image 1
+# Recommended size: 300x300px or similar, optimized for web
+# File should be named: logo.png

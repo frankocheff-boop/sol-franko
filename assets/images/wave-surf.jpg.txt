@@ -1,0 +1,5 @@
+# PLACEHOLDER: wave-surf.jpg
+# This is a placeholder file for the wave/surf image
+# Replace this with the actual optimized wave-surf.jpg from Image 2
+# Recommended size: 1920x1080px or similar, optimized for web (quality: 80-85%)
+# File should be named: wave-surf.jpg
