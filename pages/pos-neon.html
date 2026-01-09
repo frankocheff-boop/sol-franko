@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verano Estate Gourmet POS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../assets/css/pos-neon.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gourmet: {
+                            carmin: '#DC143C',
+                            'carmin-dark': '#B01030',
+                            'carmin-light': '#FF1744',
+                            cream: '#FFF8F0',
+                            beige: '#FAF7F2',
+                            gold: '#D4AF37'
+                        }
+                    },
+                    boxShadow: {
+                        'elegant': '0 4px 12px rgba(0, 0, 0, 0.12)',
+                        'elegant-hover': '0 8px 24px rgba(0, 0, 0, 0.15)',
+                        'red': '0 4px 12px rgba(220, 20, 60, 0.2)',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="h-screen overflow-hidden flex bg-gourmet-cream">
+
+    <!-- SECCIÓN IZQUIERDA: MENÚ -->
+    <div class="flex-1 flex flex-col h-full relative border-r border-gray-200">
+        
+        <!-- Header -->
+        <div class="bg-white p-4 shadow-elegant z-10 border-b-2 border-gourmet-carmin flex justify-between items-center">
+            <div>
+                <h1 class="text-3xl font-bold text-gourmet-carmin titular">
+                    VERANO <span class="text-gray-800">ESTATE</span>
+                </h1>
+                <p class="text-xs text-gourmet-carmin font-bold tracking-widest uppercase mt-1" id="datetime">SISTEMA GOURMET</p>
+            </div>
+            
+            <div class="flex-1 max-w-md mx-6">
+                <input type="text" id="search-input" placeholder="🔍 Buscar platillo..." 
+                    class="w-full bg-white border-2 border-gray-200 text-gray-800 text-lg font-medium rounded p-2 focus:border-gourmet-carmin focus:ring-1 focus:ring-gourmet-carmin outline-none transition placeholder-gray-400">
+            </div>
+
+            <div class="flex items-center gap-2">
+                <a href="ticket-manager.html" class="px-3 py-1 rounded border border-gourmet-carmin bg-white text-gourmet-carmin text-xs font-bold hover:bg-gourmet-carmin hover:text-white transition">
+                    🎫 TICKETS
+                </a>
+                <a href="../index.html" class="px-3 py-1 rounded border border-gray-300 bg-white text-gray-600 text-xs font-bold hover:bg-gray-50 transition">
+                    ← INICIO
+                </a>
+                <div class="px-3 py-1 rounded border border-green-600 bg-green-50 text-green-600 text-xs font-bold flex items-center">
+                    <span class="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span> ONLINE
+                </div>
+            </div>
+        </div>
+
+        <!-- Categorías -->
+        <div class="bg-gourmet-beige p-3 border-b border-gray-200 flex gap-3 overflow-x-auto whitespace-nowrap" id="category-container">
+            <!-- JS Renders here -->
+        </div>
+
+        <!-- Grid de Productos -->
+        <div class="flex-1 overflow-y-auto p-4 bg-gourmet-cream custom-scrollbar">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="menu-grid">
+                <!-- JS Renders here -->
+            </div>
+            
+            <div id="no-results" class="hidden h-full flex flex-col items-center justify-center text-gray-400 mt-10">
+                <span class="text-6xl mb-4 opacity-20">🍽️</span>
+                <p class="text-xl tracking-widest uppercase">No se encontraron platillos</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN DERECHA: CARRITO -->
+    <div class="w-96 bg-gourmet-beige shadow-elegant h-full flex flex-col border-l-2 border-gourmet-carmin relative z-20">
+        
+        <div class="p-5 bg-white border-b-2 border-gourmet-carmin">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="font-bold text-2xl text-gourmet-carmin titular tracking-widest">ORDEN <span class="text-gray-800">#<span id="order-id">1024</span></span></h2>
+                <button onclick="clearCart()" class="text-red-600 hover:text-red-700 hover:bg-red-50 border border-red-300 px-3 py-1 rounded transition text-xs font-bold tracking-wider">
+                    BORRAR
+                </button>
+            </div>
+            <div class="flex gap-2">
+                <button class="flex-1 bg-gray-100 border-2 border-gray-300 text-gray-700 py-2 rounded text-sm hover:border-gourmet-carmin hover:text-gourmet-carmin transition uppercase font-bold tracking-wide">Mesa</button>
+                <button class="flex-1 bg-gray-100 border-2 border-gray-300 text-gray-700 py-2 rounded text-sm hover:border-gourmet-carmin hover:text-gourmet-carmin transition uppercase font-bold tracking-wide">Llevar</button>
+            </div>
+        </div>
+
+        <!-- Lista de Items -->
+        <div class="flex-1 overflow-y-auto p-4 space-y-3 bg-white" id="cart-items">
+            <div class="h-full flex flex-col items-center justify-center text-gray-300 opacity-40">
+                <span class="text-6xl mb-2 grayscale">🛒</span>
+                <p class="titular tracking-widest">CARRITO VACÍO</p>
+            </div>
+        </div>
+
+        <!-- Totales -->
+        <div class="bg-gourmet-beige p-6 border-t-2 border-gourmet-carmin shadow-elegant">
+            <!-- Sección de cupón -->
+            <div class="mb-4 pb-4 border-b-2 border-gray-200">
+                <div class="flex gap-2 mb-2">
+                    <input type="text" id="coupon-input" placeholder="💎 CUPÓN" 
+                        class="flex-1 bg-white border-2 border-gray-200 text-gray-800 text-xs font-bold rounded px-3 py-2 focus:border-gourmet-carmin focus:ring-1 focus:ring-gourmet-carmin outline-none transition uppercase placeholder-gray-400">
+                    <button onclick="applyCoupon()" class="px-4 py-2 bg-gourmet-carmin border-2 border-gourmet-carmin text-white text-xs font-bold rounded hover:bg-gourmet-carmin-dark transition uppercase tracking-wider">
+                        APLICAR
+                    </button>
+                </div>
+                <div id="coupon-status" class="text-xs hidden"></div>
+            </div>
+            
+            <div class="space-y-2 mb-4 text-sm font-mono text-gray-700">
+                <div class="flex justify-between">
+                    <span>SUBTOTAL</span>
+                    <span id="subtotal-display" class="text-gray-900">$0.00</span>
+                </div>
+                <div id="discount-row" class="flex justify-between text-green-600 hidden">
+                    <span>DESCUENTO</span>
+                    <span id="discount-display">-$0.00</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>IVA (16%)</span>
+                    <span id="tax-display" class="text-gray-900">$0.00</span>
+                </div>
+                <div class="flex justify-between font-bold text-2xl text-gray-900 mt-2 pt-2 border-t-2 border-gray-300 titular">
+                    <span class="text-gourmet-carmin">TOTAL</span>
+                    <span id="total-display">$0.00</span>
+                </div>
+            </div>
+
+            <button onclick="openCheckout()" class="w-full bg-gourmet-carmin hover:bg-gourmet-carmin-dark text-white font-bold py-4 rounded shadow-red transform transition hover:-translate-y-1 flex justify-between px-6 items-center group border-2 border-gourmet-carmin">
+                <span class="titular tracking-[0.2em] text-lg">COBRAR</span>
+                <span id="btn-total" class="text-xl font-mono">$0.00</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL DE COBRO -->
+    <div id="checkout-modal" class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50 backdrop-blur-sm">
+        <div class="bg-white border-2 border-gourmet-carmin rounded shadow-elegant w-full max-w-md overflow-hidden relative">
+            <div class="bg-gourmet-carmin p-4 flex justify-between items-center border-b-2 border-gourmet-carmin-dark">
+                <h3 class="text-xl font-bold text-white titular tracking-wider">PROCESANDO PAGO</h3>
+                <button onclick="closeCheckout()" class="text-white hover:text-gray-200 text-2xl">&times;</button>
+            </div>
+
+            <div class="p-8">
+                <div class="text-center mb-8">
+                    <p class="text-gourmet-carmin uppercase text-xs font-bold tracking-[0.3em] mb-2">MONTO FINAL</p>
+                    <p class="text-5xl font-bold text-gourmet-carmin font-mono" id="modal-total">$0.00</p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <button onclick="processPayment('Efectivo')" class="p-6 border-2 border-gray-200 bg-white rounded hover:border-green-500 hover:bg-green-50 transition group flex flex-col items-center gap-2">
+                        <span class="text-3xl group-hover:scale-110 transition">💵</span>
+                        <span class="font-bold text-gray-700 group-hover:text-green-600 titular">EFECTIVO</span>
+                    </button>
+                    <button onclick="processPayment('Tarjeta')" class="p-6 border-2 border-gray-200 bg-white rounded hover:border-gourmet-carmin hover:bg-red-50 transition group flex flex-col items-center gap-2">
+                        <span class="text-3xl group-hover:scale-110 transition">💳</span>
+                        <span class="font-bold text-gray-700 group-hover:text-gourmet-carmin titular">TARJETA</span>
+                    </button>
+                </div>
+
+                <button onclick="closeCheckout()" class="w-full py-3 text-gray-500 font-bold hover:text-gray-700 hover:bg-gray-100 rounded transition uppercase tracking-widest text-xs">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="../assets/js/firebase-config.js"></script>
+    <script src="../assets/js/ticket-system.js"></script>
+    <script src="../assets/js/ticket-printer.js"></script>
+    
+    <!-- App Scripts -->
+    <script src="../assets/js/coupon-system.js"></script>
+    <script src="../assets/js/pos-neon.js"></script>
+</body>
+</html>
