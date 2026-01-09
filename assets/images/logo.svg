@@ -1,0 +1,8 @@
+<svg width="300" height="300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Placeholder Logo for Chef Franko -->
+  <rect width="300" height="300" fill="#DC143C"/>
+  <text x="150" y="130" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">FRANKO</text>
+  <text x="150" y="180" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">CHEF</text>
+  <circle cx="150" cy="220" r="30" fill="none" stroke="#D4AF37" stroke-width="3"/>
+  <text x="150" y="270" font-family="Arial, sans-serif" font-size="14" fill="#D4AF37" text-anchor="middle">Replace with Image 1</text>
+</svg>

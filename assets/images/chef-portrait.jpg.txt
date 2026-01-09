@@ -1,0 +1,5 @@
+# PLACEHOLDER: chef-portrait.jpg
+# This is a placeholder file for Chef Franko's portrait
+# Replace this with the actual optimized chef-portrait.jpg from Image 3
+# Recommended size: 800x800px or similar, optimized for web (quality: 80-85%)
+# File should be named: chef-portrait.jpg
